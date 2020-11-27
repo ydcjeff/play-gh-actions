@@ -11,9 +11,6 @@ on:
 jobs:
   conda:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        pytorch_channel: ['pytorch-nightly', 'pytorch-test']
     defaults:
       run:
         shell: bash -l {0}
@@ -24,7 +21,26 @@ jobs:
           auto-update-conda: true
           python-version: 3.6
 
-      - run: conda install pytorch -c ${{ matrix.pytorch_channel }}
+      - run: conda install pytorch -c pytorch-test
+      - run: git clone https://github.com/PyTorchLightning/pytorch-lightning
+      - run: pip install -r requirements/devel.txt -U
+        working-directory: pytorch-lightning
+      - run: python -m torch.utils.collect_env
+      - run: pytest pytorch_lightning tests -v -ra
+        working-directory: pytorch-lightning
+
+  pip:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.6
+
+      - run: pip install --pre torch torchvision torchaudio torchtext -f https://download.pytorch.org/nightly/cpu/torch_nightly.html
       - run: git clone https://github.com/PyTorchLightning/pytorch-lightning
       - run: pip install -r requirements/devel.txt -U
         working-directory: pytorch-lightning
