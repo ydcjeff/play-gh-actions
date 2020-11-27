@@ -24,10 +24,10 @@ jobs:
           auto-update-conda: true
           python-version: 3.6
 
-      - run: conda install pytorch torchvision torchaudio torchtext cpuonly -c ${{ matrix.pytorch_channel }}
+      - run: conda install pytorch -c ${{ matrix.pytorch_channel }}
       - run: git clone https://github.com/PyTorchLightning/pytorch-lightning
       - run: pip install -r requirements/devel.txt -U
         working-directory: pytorch-lightning
       - run: python -m torch.utils.collect_env
-      - run: make test
+      - run: pytest pytorch_lightning tests -v -ra
         working-directory: pytorch-lightning
