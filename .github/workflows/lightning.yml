@@ -1,0 +1,33 @@
+name: Lightning
+
+on:
+  push:
+    branches: 
+      - dev
+  pull_request:
+    branches: 
+      - dev
+
+jobs:
+  conda:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        pytorch_channel: ['pytorch-nightly', 'pytorch-test']
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          python-version: 3.6
+
+      - run: conda install pytorch torchvision torchaudio torchtext cpuonly -c ${{ matrix.pytorch_channel }}
+      - run: git clone https://github.com/PyTorchLightning/pytorch-lightning
+      - run: pip install -r requirements/devel.txt -U
+        working-directory: pytorch-lightning
+      - run: python -m torch.utils.collect_env
+      - run: make test
+        working-directory: pytorch-lightning
