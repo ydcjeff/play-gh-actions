@@ -1,0 +1,43 @@
+name: Cache
+
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash -l {0}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo "::set-output name=date::$(/bin/date "+%Y-%U")"
+        id: get-date
+
+      - run: pip3 install -U pip && echo "::set-output name=dir::$(python3 -m pip cache dir)"
+        id: pip-cache
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/conda_pkgs_dir
+            ${{ steps.pip-cache.outputs.dir }}
+          key: ${{ steps.get-date.outputs.date }}-pytorch-${{ runner.os }}
+          restore-keys: |
+            ${{ steps.get-date.outputs.date }}-pytorch-${{ runner.os }}
+
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          miniconda-version: "latest"
+          python-version: 3.6
+          use-only-tar-bz2: true
+          
+      - run: conda install pytorch cpuonly -c pytorch
+      - run: wget https://raw.githubusercontent.com/pytorch/ignite/master/requirements-dev.txt
+      - run: pip install -r requirements-dev.txt
