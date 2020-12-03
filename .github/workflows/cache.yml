@@ -21,7 +21,7 @@ jobs:
       - run: echo "::set-output name=date::$(/bin/date "+%Y-%U")"
         id: get-date
 
-      - run: pip3 install -U --user pip && echo "::set-output name=dir::$(python3 -m pip cache dir)"
+      - run: pip3 install -U --user pip && echo "::set-output name=dir::$(pip3 cache dir)"
         id: pip-cache
 
       - uses: actions/cache@v2
@@ -40,5 +40,4 @@ jobs:
           use-only-tar-bz2: true
           
       - run: conda install pytorch cpuonly -c pytorch
-      - run: wget https://raw.githubusercontent.com/pytorch/ignite/master/requirements-dev.txt
-      - run: pip install -r requirements-dev.txt
+      - run: pip install numpy pytest codecov pytest-cov pytest-xdist dill tqdm scikit-learn matplotlib visdom polyaxon-client wandb mlflow neptune-client
