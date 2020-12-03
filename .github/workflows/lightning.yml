@@ -27,7 +27,7 @@ jobs:
 
       - run: conda install pytorch cpuonly -c ${{ matrix.pytorch_channel }}
       - run: git clone https://github.com/PyTorchLightning/pytorch-lightning
-      - run: pip install -r requirements/devel.txt -U
+      - run: pip install -r requirements/devel.txt
         working-directory: pytorch-lightning
       - run: python -m torch.utils.collect_env
       - run: pytest pytorch_lightning tests -v -ra
