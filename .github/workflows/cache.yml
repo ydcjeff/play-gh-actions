@@ -21,10 +21,7 @@ jobs:
       - run: echo "::set-output name=date::$(/bin/date "+%Y-%U")"
         id: get-date
 
-      - run: sudo apt-get upgrade -y python3-pip
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-
-      - run: pip3 install -U --user pip && echo "::set-output name=dir::$(pip3 cache dir)"
+      - run: python3 -m pip install -U --user pip && echo "::set-output name=dir::$(python -m pip cache dir)"
         id: pip-cache
 
       - uses: actions/cache@v2
