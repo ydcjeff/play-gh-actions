@@ -21,7 +21,7 @@ jobs:
       - run: echo "::set-output name=date::$(/bin/date "+%Y-%U")"
         id: get-date
 
-      - run: python3 -m pip install -U --user pip && echo "::set-output name=dir::$(python -m pip cache dir)"
+      - run: pip install -U --user pip && echo "::set-output name=dir::$(pip cache dir)"
         id: pip-cache
 
       - uses: actions/cache@v2
