@@ -12,6 +12,7 @@ jobs:
   conda:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         pytorch_channel: [pytorch-nightly, pytorch-test]
     defaults:
