@@ -28,7 +28,7 @@ jobs:
       - run: git clone https://github.com/PyTorchLightning/pytorch-lightning
       - run: pip install -r requirements/devel.txt -U
         working-directory: pytorch-lightning
-      - run: conda upgrade pytorch cpuonly torchvision torchtext -c ${{ matrix.pytorch_channel }} -y
+      - run: conda install pytorch cpuonly torchvision torchtext -c ${{ matrix.pytorch_channel }} -y -all
       - run: python -m torch.utils.collect_env
       - run: pytest pytorch_lightning tests -v -ra
         working-directory: pytorch-lightning
@@ -36,6 +36,7 @@ jobs:
   pip:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         pytorch_channel: [nightly, test]
     defaults:
