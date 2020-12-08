@@ -28,11 +28,6 @@ jobs:
       - run: git clone https://github.com/PyTorchLightning/pytorch-lightning
       - run: pip install -r requirements/devel.txt -U
         working-directory: pytorch-lightning
-      - run: pip uninstall horovod -y && pip install horovod[pytorch] --no-cache-dir
-        env:
-          HOROVOD_BUILD_ARCH_FLAGS: "-mfma"
-          HOROVOD_WITHOUT_MXNET: 1
-          HOROVOD_WITHOUT_TENSORFLOW: 1
       - run: conda install pytorch cpuonly torchvision torchtext -c ${{ matrix.pytorch_channel }} -y --all
       - run: python -m torch.utils.collect_env
       - run: pytest pytorch_lightning tests -v -ra
@@ -56,11 +51,6 @@ jobs:
       - run: git clone https://github.com/PyTorchLightning/pytorch-lightning
       - run: pip install -r requirements/devel.txt -U
         working-directory: pytorch-lightning
-      - run: pip uninstall horovod -y && pip install horovod[pytorch] --no-cache-dir
-        env:
-          HOROVOD_BUILD_ARCH_FLAGS: "-mfma"
-          HOROVOD_WITHOUT_MXNET: 1
-          HOROVOD_WITHOUT_TENSORFLOW: 1
       - run: pip install --pre torch torchvision torchaudio torchtext -U -f https://download.pytorch.org/whl/${{ matrix.pytorch_channel }}/cpu/torch_${{ matrix.pytorch_channel }}.html
       - run: python -m torch.utils.collect_env
       - run: pytest pytorch_lightning tests -v -ra
