@@ -26,7 +26,7 @@ jobs:
           python-version: 3.6
 
       - run: git clone https://github.com/PyTorchLightning/pytorch-lightning
-      - run: pip install -r requirements/devel.txt -U
+      - run: pip install -r requirements/devel.txt -U --no-cache-dir
         env:
           HOROVOD_WITH_PYTORCH: 1
         working-directory: pytorch-lightning
@@ -51,7 +51,7 @@ jobs:
           python-version: 3.6
 
       - run: git clone https://github.com/PyTorchLightning/pytorch-lightning
-      - run: pip install -r requirements/devel.txt -U
+      - run: pip install -r requirements/devel.txt -U --no-cache-dir
         env:
           HOROVOD_WITH_PYTORCH: 1
         working-directory: pytorch-lightning
