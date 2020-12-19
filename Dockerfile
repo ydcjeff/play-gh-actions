@@ -1,4 +1,5 @@
-FROM pytorchignite/base:latest
+# FROM pytorchignite/base:latest
+FROM pytorch/pytorch:1.7.0-cuda11.0-cudnn8-runtime
 
 # Install opencv dependencies
 RUN apt-get update && \
@@ -14,6 +15,7 @@ RUN pip install --upgrade --no-cache-dir albumentations \
                                          numpy \
                                          opencv-python \
                                          pillow \
+                                         pytorch-ignite \
                                          py_config_runner \
                                          "trains>=0.15.0"
 
