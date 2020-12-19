@@ -13,6 +13,7 @@ RUN pip install --upgrade --no-cache-dir albumentations \
                                          image-dataset-viz \
                                          numpy \
                                          opencv-python \
+                                         pillow \
                                          py_config_runner \
                                          "trains>=0.15.0"
 
