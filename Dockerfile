@@ -9,6 +9,7 @@ RUN apt-get update && \
     apt-get -y install --no-install-recommends libglib2.0 \
                                                libsm6 \
                                                libxext6 \
+                                               libjpeg-turbo \
                                                libxrender-dev && \
     rm -rf /var/lib/apt/lists/*
 
@@ -22,4 +23,4 @@ RUN pip install --upgrade --no-cache-dir albumentations \
                                          py_config_runner \
                                          "trains>=0.15.0"
 
-RUN pip uninstall -y pillow && CC="cc -mavx2" pip install -U --force-reinstall pillow-simd
+RUN pip uninstall -y pillow && CC="gcc -mavx2" pip install -U --force-reinstall pillow-simd
