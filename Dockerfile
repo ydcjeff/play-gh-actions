@@ -5,6 +5,9 @@ FROM pytorch/pytorch:latest
 RUN apt-get update && \
     ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime && \
     apt-get install -y tzdata && \
+    apt-get install -y --no-install-recommends \
+	build-essential \
+	ca-certificates && \
     dpkg-reconfigure --frontend noninteractive tzdata && \
     apt-get -y install --no-install-recommends libglib2.0 \
                                                libsm6 \
