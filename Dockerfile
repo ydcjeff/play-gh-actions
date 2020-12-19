@@ -9,7 +9,6 @@ RUN apt-get update && \
     apt-get -y install --no-install-recommends libglib2.0 \
                                                libsm6 \
                                                libxext6 \
-                                               libjpeg-turbo \
                                                libxrender-dev && \
     rm -rf /var/lib/apt/lists/*
 
