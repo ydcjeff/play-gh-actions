@@ -1,15 +1,10 @@
-# FROM pytorchignite/base:latest
-FROM pytorch/pytorch:latest
+# Dockerfile.vision
+FROM pytorchignite/base:latest
 
 # Install opencv dependencies
 RUN apt-get update && \
-    ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime && \
-    apt-get install -y tzdata && \
-    apt-get install -y --no-install-recommends \
-	build-essential \
-	ca-certificates && \
-    dpkg-reconfigure --frontend noninteractive tzdata && \
-    apt-get -y install --no-install-recommends libglib2.0 \
+    apt-get -y install --no-install-recommends build-essential \
+                                               ca-certificates \
                                                libsm6 \
                                                libxext6 \
                                                libxrender-dev && \
@@ -20,8 +15,6 @@ RUN pip install --upgrade --no-cache-dir albumentations \
                                          image-dataset-viz \
                                          numpy \
                                          opencv-python \
-                                         pillow \
-                                         pytorch-ignite \
                                          py_config_runner \
                                          "trains>=0.15.0"
 
