@@ -1,6 +1,8 @@
 FROM pytorch/pytorch:latest
 
 RUN apt-get update -y && \
+    ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime && \
+    apt-get install -y tzdata && \
 	apt-get install -y --no-install-recommends \
 	build-essential \
 	ca-certificates && \
