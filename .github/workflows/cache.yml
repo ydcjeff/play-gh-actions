@@ -1,8 +1,8 @@
 name: Cache
 
 on:
-  schedule:
-    - cron: '0/5 * * * *'
+#   schedule:
+#     - cron: '0/5 * * * *'
   push:
     branches: [ dev ]
   pull_request:
@@ -20,8 +20,8 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
       - uses: actions/checkout@v2
-      - run: echo ${{ github }}
-      - run: echo ${{ github.event_name }}
+#       - run: echo ${{ github }}
+#       - run: echo ${{ github.event_name }}
       - run: echo "::set-output name=date::$(/bin/date "+%Y-%U")"
         id: get-date
 
