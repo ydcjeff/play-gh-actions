@@ -2,7 +2,7 @@ name: Cache
 
 on:
   schedule:
-    - cron: '0/5 * * * *'
+    - cron: '0,5 15 * * *'
   push:
     branches: [ dev ]
   pull_request:
