@@ -23,12 +23,14 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v2
         with:
           auto-update-conda: true
-          python-version: 3.6
+          python-version: 3.8
 
-      - run: conda install pytorch cpuonly -c ${{ matrix.pytorch_channel }}
       - run: git clone https://github.com/PyTorchLightning/pytorch-lightning
-      - run: pip install -r requirements/devel.txt -U
+      - run: pip install -r requirements/devel.txt -U --no-cache-dir
+        env:
+          HOROVOD_WITH_PYTORCH: 1
         working-directory: pytorch-lightning
+      - run: conda install pytorch torchvision torchtext -c ${{ matrix.pytorch_channel }} -y --all
       - run: python -m torch.utils.collect_env
       - run: pytest pytorch_lightning tests -v -ra
         working-directory: pytorch-lightning
@@ -36,6 +38,7 @@ jobs:
   pip:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         pytorch_channel: [nightly, test]
     defaults:
@@ -45,12 +48,14 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.6
+          python-version: 3.8
 
-      - run: pip install --pre torch torchvision torchaudio torchtext -f https://download.pytorch.org/whl/${{ matrix.pytorch_channel }}/cpu/torch_${{ matrix.pytorch_channel }}.html
       - run: git clone https://github.com/PyTorchLightning/pytorch-lightning
-      - run: pip install -r requirements/devel.txt -U
+      - run: pip install -r requirements/devel.txt -U --no-cache-dir
+        env:
+          HOROVOD_WITH_PYTORCH: 1
         working-directory: pytorch-lightning
+      - run: pip install --pre torch torchvision torchaudio torchtext -U -f https://download.pytorch.org/whl/${{ matrix.pytorch_channel }}/torch_${{ matrix.pytorch_channel }}.html
       - run: python -m torch.utils.collect_env
       - run: pytest pytorch_lightning tests -v -ra
         working-directory: pytorch-lightning
