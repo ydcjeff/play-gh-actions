@@ -22,3 +22,5 @@ jobs:
         with:
           push: false
           file: Dockerfile
+          build-args: |
+            PTH_VERSION=1.7.1
