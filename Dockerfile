@@ -29,6 +29,7 @@ RUN mkdir -p pytorch-ignite-examples && \
     echo examples >> .git/info/sparse-checkout && \
     git remote add -f origin https://github.com/pytorch/ignite.git && \
     git pull origin master && \
-    python mnist/mnist.py
+    ls
+#     python mnist/mnist.py
 
 RUN pip list
