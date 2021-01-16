@@ -11,7 +11,7 @@ RUN apt-get update && \
     ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime && \
     apt-get install -y tzdata && \
     dpkg-reconfigure --frontend noninteractive tzdata && \
-    apt-get -y install --no-install-recommends git && \
+    apt-get -y install --no-install-recommends git g++ && \
     rm -rf /var/lib/apt/lists/*
 
 # Ignite main dependencies
