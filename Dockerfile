@@ -18,6 +18,8 @@ RUN apt-get update && \
 RUN pip install --upgrade --no-cache-dir pytorch-ignite \
                                          tensorboard \
                                          tqdm
+                                         
+RUN pip uninstall pillow && CC="cc -mavx2" pip install -U --no-cache-dir --force-reinstall pillow-simd
 
 # Checkout Ignite examples only
 RUN mkdir -p pytorch-ignite-examples && \
@@ -29,3 +31,4 @@ RUN mkdir -p pytorch-ignite-examples && \
     git pull origin master
 
 RUN pip list
+RUN python mnist.py
