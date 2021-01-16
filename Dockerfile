@@ -31,4 +31,4 @@ RUN mkdir -p pytorch-ignite-examples && \
     git pull origin master
 
 RUN pip list
-RUN python mnist.py
+RUN python pytorch-ignite-examples/mnist.py
