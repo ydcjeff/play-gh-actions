@@ -2,9 +2,8 @@ name: docker
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ master ]
   pull_request:
-    branches: [ dev ]
 
 jobs:
   test:
@@ -23,3 +22,5 @@ jobs:
         with:
           push: false
           file: Dockerfile
+          build-args: |
+            PTH_VERSION=1.7.0-cuda11.0-cudnn8
