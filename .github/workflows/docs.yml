@@ -8,9 +8,10 @@ on:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    env:
+      working-directory: ignite
     steps:
       - run: git clone https://github.com/ydcjeff/ignite.git --branch docs/katex
-      - run: cd ignite
       - uses: actions/setup-python@v2
         with:
           python-version: 3.7
