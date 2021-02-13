@@ -25,5 +25,5 @@ jobs:
 #           file: Dockerfile
 #           build-args: |
 #             PTH_VERSION=1.7.0-cuda11.0-cudnn8
-      - run: docker build --build-arg=1.7.1-cuda11.0-cudnn8 -t pytorchignite/base:latest -f Dockerfile .
+      - run: docker build --build-arg PTH_VERSION=1.7.1-cuda11.0-cudnn8 -t pytorchignite/base:latest -f Dockerfile .
       - run: docker images | grep pytorchignite
