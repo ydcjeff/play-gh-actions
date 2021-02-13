@@ -25,3 +25,4 @@ jobs:
           file: Dockerfile
           build-args: |
             PTH_VERSION=1.7.0-cuda11.0-cudnn8
+      - run: docker images | grep pytorchignite
