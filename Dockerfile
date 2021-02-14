@@ -10,17 +10,22 @@ RUN apt-get update && \
     dpkg-reconfigure --frontend noninteractive tzdata && \
     apt-get -y install --no-install-recommends git g++ && \
     apt-get autoremove -y && \
-    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /var/lib/apt/lists/*
+
 # Ignite main dependencies
-    pip install --upgrade --no-cache-dir pytorch-ignite \
+RUN pip install --upgrade --no-cache-dir pytorch-ignite \
                                          tensorboard \
-                                         tqdm && \
+                                         tqdm
+
 # replace pillow with pillow-simd
+RUN apt-get -y install --no-install-recommends g++ && \
     pip uninstall -y pillow && \
     CC="cc -mavx2" pip install --upgrade --no-cache-dir --force-reinstall pillow-simd && \
-    apt-get autoremove -y && \
+    apt-get remove g++ -y && \
+    apt-get autoremove -y
+
 # Checkout Ignite examples only
-    mkdir -p pytorch-ignite-examples && \
+RUN mkdir -p pytorch-ignite-examples && \
     cd pytorch-ignite-examples && \
     git init && \
     git config core.sparsecheckout true && \
