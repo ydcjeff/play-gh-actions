@@ -8,7 +8,7 @@ RUN apt-get update && \
     ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime && \
     apt-get install -y tzdata && \
     dpkg-reconfigure --frontend noninteractive tzdata && \
-    apt-get -y install --no-install-recommends git && \
+    apt-get -y install --no-install-recommends git g++ && \
     apt-get autoremove -y && \
     apt-get clean -y && \
     rm -rf /root/.cache && \
@@ -20,14 +20,9 @@ RUN pip install --upgrade --no-cache-dir pytorch-ignite \
                                          tqdm
 
 # replace pillow with pillow-simd
-RUN apt-get -y install --no-install-recommends g++ && \
-    pip uninstall -y pillow && \
+RUN pip uninstall -y pillow && \
     CC="cc -mavx2" pip install --upgrade --no-cache-dir --force-reinstall pillow-simd && \
-    apt-get remove -y g++ && \
-    apt-get autoremove -y && \
-    apt-get clean -y && \
-    rm -rf /root/.cache && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get remove -y g++
 
 # Checkout Ignite examples only
 RUN mkdir -p pytorch-ignite-examples && \
