@@ -6,7 +6,7 @@ FROM pytorch/pytorch:${PTH_VERSION}-runtime
 # Install tzdata / git
 RUN apt-get update && \
     ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime && \
-    apt-get install -y tzdata git g++ && \
+    apt-get install -y --no-install-recommends tzdata git g++ && \
     dpkg-reconfigure --frontend noninteractive tzdata && \
     apt-get autoremove -y && \
     apt-get clean -y && \
