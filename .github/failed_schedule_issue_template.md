@@ -1,5 +1,5 @@
 ---
-title: {{ env.GITHUB_WORKFLOW }} failed
+title: Scheduled workflow failed
 labels:
   - bug
   - "module: datasets"
@@ -15,6 +15,5 @@ Please look into it:
 {{ env.GITHUB_SERVER_URL }}/{{ env.GITHUB_REPOSITORY }}/actions/runs/{{ env.GITHUB_RUN_ID }}
 
 Feel free to close this if this was just a one-off error.
-
 
 cc: @{{ env.GITHUB_ACTOR }}
