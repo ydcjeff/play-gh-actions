@@ -27,6 +27,6 @@ GITHUB_JOB {{ env.GITHUB_JOB }}
 Oh no, something went wrong in the scheduled workflow {{ env.GITHUB_WORKFLOW }}/{{ env.GITHUB_JOB }}.
 Please look into it:
 
-{{ env.GITHUB_SERVER_URL }}/{{ env.GITHUB_REPOSITORY }}/actions/run/{{ env.GITHUB_RUN_ID }}
+{{ env.GITHUB_SERVER_URL }}/{{ env.GITHUB_REPOSITORY }}/actions/runs/{{ env.GITHUB_RUN_ID }}
 
 Feel free to close this if this was just a one-off error.
