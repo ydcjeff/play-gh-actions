@@ -22,6 +22,7 @@ GITHUB_BASE_REF {{ env.GITHUB_BASE_REF }}
 GITHUB_SERVER_URL {{ env.GITHUB_SERVER_URL }}
 GITHUB_API_URL {{ env.GITHUB_API_URL }}
 GITHUB_GRAPHQL_URL {{ env.GITHUB_GRAPHQL_URL }}
+GITHUB_JOB {{ env.GITHUB_JOB }}
 
 Oh no, something went wrong in the scheduled workflow {{ env.GITHUB_WORKFLOW }}/{{ env.GITHUB_JOB }}.
 Please look into it:
