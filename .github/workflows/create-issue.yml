@@ -1,0 +1,20 @@
+name: Create an issue
+
+on: [pull_request, push]
+
+jobs:
+  issue:
+    runs-on: ubuntu-latest
+    steps:
+      - run: python main.py
+      - uses: JasonEtco/create-an-issue@v2
+        name: Create issue if failed
+        if: failure()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          WORKFLOW: ${{ github.workflow }}
+          JOB: ${{ github.job }}
+          ID: ${{ github.run_id }}
+        with:
+          filename: .github/failed_schedule_issue_template.md
