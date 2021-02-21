@@ -23,9 +23,9 @@ GITHUB_SERVER_URL {{ env.GITHUB_SERVER_URL }}
 GITHUB_API_URL {{ env.GITHUB_API_URL }}
 GITHUB_GRAPHQL_URL {{ env.GITHUB_GRAPHQL_URL }}
 
-Oh no, something went wrong in the scheduled workflow {{ env.WORKFLOW }}/{{ env.JOB }}.
+Oh no, something went wrong in the scheduled workflow {{ env.GITHUB_WORKFLOW }}/{{ env.GITHUB_JOB }}.
 Please look into it:
 
-https://github.com/{{ env.REPO }}/actions/runs/{{ env.ID }}
+{{ env.GITHUB_SERVER_URL }}/{{ env.GITHUB_REPOSITORY }}/actions/run/{{ env.GITHUB_RUN_ID }}
 
 Feel free to close this if this was just a one-off error.
