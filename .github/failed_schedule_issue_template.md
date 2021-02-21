@@ -3,6 +3,7 @@ title: Scheduled workflow failed
 labels:
   - bug
   - "module: datasets"
+  - ci
 ---
 
 GITHUB_WORKFLOW {{ env.GITHUB_WORKFLOW }}
