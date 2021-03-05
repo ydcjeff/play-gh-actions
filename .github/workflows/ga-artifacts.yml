@@ -85,10 +85,11 @@ jobs:
           mypy --config-file mypy.ini
 
       - name: Run Tests
+        working-directory: ignite
         shell: bash -l {0}
         run: |
           SKIP_DISTRIB_TESTS=${{ matrix.skip-distrib-tests }} bash tests/run_cpu_tests.sh
 
       - uses: actions/upload-artifact@v2
         with:
-          path: ./coverage.xml
+          path: ./ignite/coverage.xml
