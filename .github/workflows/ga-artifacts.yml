@@ -5,9 +5,6 @@ on:
 
 jobs:
   build:
-    defaults:
-      run:
-        working-directory: ignite
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -36,6 +33,7 @@ jobs:
         run: |
           echo "::set-output name=date::$(/bin/date "+%Y-%U")"
         shell: bash -l {0}
+        working-directory: ignite
 
       - name: Get pip cache dir
         id: pip-cache
@@ -43,6 +41,7 @@ jobs:
           pip3 install -U --user pip
           echo "::set-output name=dir::$(pip3 cache dir)"
         shell: bash -l {0}
+        working-directory: ignite
 
       - uses: actions/cache@v2
         with:
@@ -61,6 +60,7 @@ jobs:
           use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
 
       - name: Install dependencies
+        working-directory: ignite
         shell: bash -l {0}
         run: |
           conda install pytorch torchvision cpuonly -c ${{ matrix.pytorch-channel }}
@@ -68,6 +68,7 @@ jobs:
           python setup.py install
 
       - name: Check code formatting
+        working-directory: ignite
         shell: bash -l {0}
         run: |
           pip install flake8 "black==19.10b0" "isort==5.7.0"
@@ -76,6 +77,7 @@ jobs:
           isort -c --profile black .
 
       - name: Run Mypy
+        working-directory: ignite
         shell: bash -l {0}
         if: ${{ matrix.os == 'ubuntu-latest' }}
         run: |
