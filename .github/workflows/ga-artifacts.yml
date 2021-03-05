@@ -1,6 +1,6 @@
 name: Run unit tests
 on:
-  push: [ master ]
+  push:
   pull_request:
 
 jobs:
