@@ -17,7 +17,6 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
-    - run: python --version
-    - run: python3 --version
+    - run: python3 -m pip install -U pip
     - run: pip cache dir
-    - run: pip3 cache dir
+
