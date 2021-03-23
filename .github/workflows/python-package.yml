@@ -24,6 +24,7 @@ jobs:
     - run: python3 -m venv test-env
 
   create-issue:
+    needs: build
     if: github.event.check_suite.conclusion == 'failure'
     runs-on: ubuntu-latest
     steps:
