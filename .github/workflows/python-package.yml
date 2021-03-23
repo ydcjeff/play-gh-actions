@@ -24,7 +24,7 @@ jobs:
     - run: python3 -m venv test-env
 
   create-issue:
-    if: ${{ github.event_name.check_suite.conclusion == "failure" }}
+    if: github.event_name.check_suite.conclusion == "failure"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
