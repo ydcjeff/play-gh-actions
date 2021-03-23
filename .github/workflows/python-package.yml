@@ -22,7 +22,7 @@ jobs:
 
   create-issue:
     needs: build
-    if: always() && github.event.check_suite.conclusion == 'failure'
+    if: always() && needs.build.result == 'failure'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
