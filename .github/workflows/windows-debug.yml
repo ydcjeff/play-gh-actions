@@ -15,7 +15,9 @@ jobs:
     container: ubuntu
     steps:
     - uses: actions/checkout@v2
-    - run: git clone https://github.com/pytorch/ignite
+      with:
+        repository: ydcjeff/ignite
+        ref: common-cov
     - uses: conda-incubator/setup-miniconda@v2
       with:
         python-version: 3.8
@@ -23,11 +25,9 @@ jobs:
         activate-environment: test
         use-only-tar-bz2: true
     - name: Install dependencies
-      working-directory: ignite
       run: |
         conda install pytorch torchvision cpuonly -c pytorch -c conda-forge
         pip install -r requirements-dev.txt
         python setup.py install
     - name: Run tests
-      working-directory: ignite
       run: SKIP_DISTRIB_TESTS=1 bash tests/run_cpu_tests.sh
