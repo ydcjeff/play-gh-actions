@@ -13,7 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
-    - run: grep -rl "--upgrade" . | xargs sed -i "" "s/--upgrade/-U/g"
+    - run: grep -rl "upgrade" . | xargs sed -i "" "s/upgrade/U/g"
 
 
 #   create-issue:
