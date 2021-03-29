@@ -13,7 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
-    - run: grep -rl "upgrade" . | xargs sed -i "" "s/upgrade/U/g"
+    - run: if [ $(uname) == "Darwin" ]; then grep -rl "upgrade" . | xargs sed -i "" "s/upgrade/U/g" else grep -rl "upgrade" . | xargs sed -i "s/upgrade/U/g" fi
 
 
 #   create-issue:
