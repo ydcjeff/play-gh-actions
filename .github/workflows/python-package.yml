@@ -13,20 +13,19 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
-    - run: python3 -m pip install -U pip
-    - run: python3 -m pip cache dir
-    - run: python3 -m venv test-env
+    - run: grep -rl --upgrade . | xargs sed -i "" "s/--upgrade/-U/g"
 
-  create-issue:
-    needs: build
-    if: always() && needs.build.result == 'failure'
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: JasonEtco/create-an-issue@v2
-      name: Create issue if pytorch version tests failed
-      if: needs.build.result == 'failure'
-      with:
-        filename: .github/failed_schedule_issue_template.md
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+#   create-issue:
+#     needs: build
+#     if: always() && needs.build.result == 'failure'
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v2
+#     - uses: JasonEtco/create-an-issue@v2
+#       name: Create issue if pytorch version tests failed
+#       if: needs.build.result == 'failure'
+#       with:
+#         filename: .github/failed_schedule_issue_template.md
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
