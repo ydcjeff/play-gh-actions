@@ -4,6 +4,10 @@ on:
     branches: [ master ]
   pull_request:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     strategy:
@@ -16,6 +20,12 @@ jobs:
     - run: python3 -m pip install -U pip
     - run: python3 -m pip cache dir
     - run: python3 -m venv test-env
+    - run: echo ${{ github.workflow }}
+    - run: echo ${{ github.event_name == 'pull_request' }}
+    - run: echo ${{ github.head_ref }}
+    - run: echo ${{ github.ref }}
+    - run: echo ${{ github.ref_name }}
+    - run: echo ${{ toJSON(github) }}
 
   create-issue:
     needs: build
