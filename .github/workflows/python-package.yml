@@ -20,6 +20,10 @@ jobs:
     - run: python3 -m pip install -U pip
     - run: python3 -m pip cache dir
     - run: python3 -m venv test-env
+    - run: echo ${{ github.workflow }}
+    - run: echo ${{ github.event_name }}
+    - run: echo ${{ github.head_ref }}
+    - run: echo ${{ github.ref }}
 
   create-issue:
     needs: build
