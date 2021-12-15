@@ -25,7 +25,7 @@ jobs:
     - run: echo ${{ github.head_ref }}
     - run: echo ${{ github.ref }}
     - run: echo ${{ github.ref_name }}
-    - run: echo $GITHUB_CONTEXT
+    - run: echo ${{ toJSON(github) }}
 
   create-issue:
     needs: build
